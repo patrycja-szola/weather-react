@@ -12,6 +12,20 @@
   list-style: none;
   text-align: left;
 }
+.App-footer {
+  font-size: 16px;
+}
+
+.App-footer a {
+  font-size: 16px;
+  color: lightblue;
+  text-decoration: none;
+}
+
+.App-footer a:hover {
+  text-decoration: underline;
+  color: lightblue;
+}
 
 .App-logo {
   height: 40vmin;

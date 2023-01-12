@@ -64,9 +64,25 @@ export default function Search() {
             <img src={icon} width="70" alt="" />
           </li>
         </ul>
+        <span className="App-footer">
+          <a href="https://github.com/szyszka212/weather-react">
+            Open-sourced code{" "}
+          </a>
+          by Pati_
+        </span>
       </div>
     );
   } else {
-    return form;
+    return (
+      <div>
+        {form}
+        <span className="App-footer">
+          <a href="https://github.com/szyszka212/weather-react">
+            Open-sourced code{" "}
+          </a>
+          by <strong>Pati_</strong>
+        </span>
+      </div>
+    );
   }
 }
