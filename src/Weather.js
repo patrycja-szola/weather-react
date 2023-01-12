@@ -2,8 +2,8 @@ import React from "react";
 import axios from "axios";
 import { Comment } from "react-loader-spinner";
 
-// npm start - tym rozpoczynam
-// Ctrl C - tym kończę
+// npm start - tym uruchamiam serwer
+// Ctrl C - tym zatrzymuję serwer
 // przed każdym załadowaniem nowej biblioteki, najlepiej zakończyć, potem załadować, wprowadzić zmiany w kodzie i wtedy dopiero rozpocząć od nowa
 
 export default function Weather(props) {
@@ -17,8 +17,8 @@ export default function Weather(props) {
   return (
     <Comment
       visible={true}
-      height="80"
-      width="80"
+      height="100"
+      width="100"
       ariaLabel="comment-loading"
       wrapperStyle={{}}
       wrapperClass="comment-wrapper"
