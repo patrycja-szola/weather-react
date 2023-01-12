@@ -2,6 +2,17 @@
   text-align: center;
 }
 
+.App-list-header {
+  list-style: none;
+  text-align: left;
+  color: lightblue;
+  text-decoration: underline;
+}
+.App-list {
+  list-style: none;
+  text-align: left;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
