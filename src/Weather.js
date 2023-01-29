@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
+import WeatherTemperature from "./WeatherTemperature";
 
 export default function Search() {
   let [city, setCity] = useState("");
@@ -15,7 +16,9 @@ export default function Search() {
 
   function showTemperature(response) {
     setLoaded(true);
-    setTemperature(Math.round(response.data.temperature.current));
+    setTemperature(
+      <WeatherTemperature celcius={response.data.temperature.current} />
+    );
     setDescription(response.data.condition.description);
     setHumidity(Math.round(response.data.temperature.humidity));
     setWind(Math.round(response.data.wind.speed));
@@ -81,9 +84,7 @@ export default function Search() {
                   <li>
                     Description:<strong> {description}</strong>
                   </li>
-                  <li>
-                    Temperature:<strong> {temperature}°C</strong>
-                  </li>
+                  <li>Temperature: {temperature}</li>
                   <li>
                     Humidity:<strong> {humidity}%</strong>
                   </li>
