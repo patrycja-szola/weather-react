@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.css";
 
 export default function Search() {
   let [city, setCity] = useState("");
+  let [country, setCountry] = useState("");
   let [temperature, setTemperature] = useState("");
   let [description, setDescription] = useState("");
   let [humidity, setHumidity] = useState("");
@@ -13,18 +15,19 @@ export default function Search() {
 
   function showTemperature(response) {
     setLoaded(true);
-    setTemperature(Math.round(response.data.main.temp));
-    setDescription(response.data.weather[0].description);
-    setHumidity(Math.round(response.data.main.humidity));
+    setTemperature(Math.round(response.data.temperature.current));
+    setDescription(response.data.condition.description);
+    setHumidity(Math.round(response.data.temperature.humidity));
     setWind(Math.round(response.data.wind.speed));
+    setCountry(response.data.country);
     setIcon(
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+      `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
     );
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    setCityName(city);
+    setCityName(city.charAt(0).toUpperCase() + city.slice(1).toLowerCase()); //we wprowadzonym tekście pierwsza litera będzie duża, a reszta liter będzie mała
     let url = `https://api.shecodes.io/weather/v1/current?query=${city}&key=ea5bo889dfa0b4td5adbc7d7388af13a&units=metric`;
     axios.get(url).then(showTemperature);
   }
@@ -39,23 +42,14 @@ export default function Search() {
         type="search"
         placeholder="Type a city"
         onChange={updateCity}
-        autocomplete="off"
+        autoComplete="off"
       />
       <input
         type="submit"
         value="Search"
         id="findButton"
-        className="findButton"
+        className="btn btn-primary m-3"
       />
-      <span className="col">
-        <button
-          type="button"
-          id="currentLocationButton"
-          className="findButton w-20"
-        >
-          Current Location
-        </button>
-      </span>
     </form>
   );
 
@@ -67,31 +61,28 @@ export default function Search() {
           <div className="weather-app">
             <div className="row">
               <div className="col-6">
-                <h1>
+                <h1 className="mt-3 mb-0 ">
                   <strong>
-                    <uppercase>{cityName}</uppercase>
+                    {cityName}, {country}
                   </strong>
                 </h1>
-                <ul>
-                  <li className="App-list-header">
-                    Weather details updated: <br />
-                    <strong>
-                      <span id="dayTime"></span>
-                    </strong>
-                  </li>
-                </ul>
+                <div className="text-center">
+                  <img
+                    src={icon}
+                    width="35%"
+                    alt=""
+                    className="img-fluid rounded mt-0"
+                  />
+                </div>
               </div>
               <div className="col-6">
-                <div className="d-flex weather-temperature">
-                  <img src={icon} width="50%" alt="" />
-                </div>
-                <ul className="App-list">
+                <ul className="App-list mt-4">
                   <li className="App-list-header"></li>
                   <li>
-                    Temperature:<strong> {temperature}°C</strong>
+                    Description:<strong> {description}</strong>
                   </li>
                   <li>
-                    Description:<strong> {description}</strong>
+                    Temperature:<strong> {temperature}°C</strong>
                   </li>
                   <li>
                     Humidity:<strong> {humidity}%</strong>
