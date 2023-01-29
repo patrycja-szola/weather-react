@@ -25,7 +25,7 @@ export default function Search() {
   function handleSubmit(event) {
     event.preventDefault();
     setCityName(city);
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1a503fb7a97ad8050479d85fae658043&units=metric`;
+    let url = `https://api.shecodes.io/weather/v1/current?query=${city}&key=ea5bo889dfa0b4td5adbc7d7388af13a&units=metric`;
     axios.get(url).then(showTemperature);
   }
 
@@ -35,8 +35,27 @@ export default function Search() {
 
   let form = (
     <form onSubmit={handleSubmit}>
-      <input type="search" placeholder="Type a city" onChange={updateCity} />
-      <input type="submit" value="Search" />
+      <input
+        type="search"
+        placeholder="Type a city"
+        onChange={updateCity}
+        autocomplete="off"
+      />
+      <input
+        type="submit"
+        value="Search"
+        id="findButton"
+        className="findButton"
+      />
+      <span className="col">
+        <button
+          type="button"
+          id="currentLocationButton"
+          className="findButton w-20"
+        >
+          Current Location
+        </button>
+      </span>
     </form>
   );
 
@@ -44,32 +63,54 @@ export default function Search() {
     return (
       <div>
         {form}
-        <ul className="App-list">
-          <li className="App-list-header">
-            <strong>{cityName}</strong>
-          </li>
-          <li>
-            Temperature:<strong> {temperature}°C</strong>
-          </li>
-          <li>
-            Description:<strong> {description}</strong>
-          </li>
-          <li>
-            Humidity:<strong> {humidity}%</strong>
-          </li>
-          <li>
-            Wind speed:<strong> {wind}km/h</strong>
-          </li>
-          <li>
-            <img src={icon} width="70" alt="" />
-          </li>
-        </ul>
-        <span className="App-footer">
-          <a href="https://github.com/szyszka212/weather-react">
-            Open-sourced code{" "}
-          </a>
-          by Pati_
-        </span>
+        <div className="main-border">
+          <div className="weather-app">
+            <div className="row">
+              <div className="col-6">
+                <h1>
+                  <strong>
+                    <uppercase>{cityName}</uppercase>
+                  </strong>
+                </h1>
+                <ul>
+                  <li className="App-list-header">
+                    Weather details updated: <br />
+                    <strong>
+                      <span id="dayTime"></span>
+                    </strong>
+                  </li>
+                </ul>
+              </div>
+              <div className="col-6">
+                <div className="d-flex weather-temperature">
+                  <img src={icon} width="50%" alt="" />
+                </div>
+                <ul className="App-list">
+                  <li className="App-list-header"></li>
+                  <li>
+                    Temperature:<strong> {temperature}°C</strong>
+                  </li>
+                  <li>
+                    Description:<strong> {description}</strong>
+                  </li>
+                  <li>
+                    Humidity:<strong> {humidity}%</strong>
+                  </li>
+                  <li>
+                    Wind speed:<strong> {wind}km/h</strong>
+                  </li>
+                  <li></li>
+                </ul>
+              </div>
+              <span className="App-footer">
+                <a href="https://github.com/szyszka212/weather-react">
+                  Open-sourced code{" "}
+                </a>
+                by Pati_
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     );
   } else {
