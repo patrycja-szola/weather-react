@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import WeatherTemperature from "./WeatherTemperature";
+import FormattedDate from "./FormattedDate";
 
 export default function Search() {
   let [city, setCity] = useState("");
@@ -12,6 +13,7 @@ export default function Search() {
   let [wind, setWind] = useState("");
   let [icon, setIcon] = useState("");
   let [cityName, setCityName] = useState("");
+  let [date, setDate] = useState("");
   let [loaded, setLoaded] = useState(false);
 
   function showTemperature(response) {
@@ -26,6 +28,8 @@ export default function Search() {
     setIcon(
       `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
     );
+    setDate(new Date(response.data.time * 1000));
+    console.log(response.data);
   }
 
   function handleSubmit(event) {
@@ -60,6 +64,7 @@ export default function Search() {
     return (
       <div>
         {form}
+
         <div className="main-border">
           <div className="weather-app">
             <div className="row">
@@ -70,6 +75,10 @@ export default function Search() {
                   </strong>
                 </h1>
                 <div className="text-center">
+                  <h4>
+                    <FormattedDate date={date} />
+                  </h4>
+
                   <img
                     src={icon}
                     width="35%"
