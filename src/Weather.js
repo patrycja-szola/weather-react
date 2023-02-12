@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import WeatherTemperature from "./WeatherTemperature";
+import WeatherForecast from "./WeatherForecast";
 import FormattedDate from "./FormattedDate";
 
 export default function Search() {
@@ -9,6 +10,7 @@ export default function Search() {
   let [country, setCountry] = useState("");
   let [temperature, setTemperature] = useState("");
   let [description, setDescription] = useState("");
+  let [pressure, setPressure] = useState("");
   let [humidity, setHumidity] = useState("");
   let [wind, setWind] = useState("");
   let [icon, setIcon] = useState("");
@@ -21,7 +23,11 @@ export default function Search() {
     setTemperature(
       <WeatherTemperature celcius={response.data.temperature.current} />
     );
-    setDescription(response.data.condition.description);
+    setDescription(
+      response.data.condition.description.charAt(0).toUpperCase() +
+        response.data.condition.description.slice(1).toLowerCase()
+    );
+    setPressure(response.data.temperature.pressure);
     setHumidity(Math.round(response.data.temperature.humidity));
     setWind(Math.round(response.data.wind.speed));
     setCountry(response.data.country);
@@ -29,7 +35,6 @@ export default function Search() {
       `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
     );
     setDate(new Date(response.data.time * 1000));
-    console.log(response.data);
   }
 
   function handleSubmit(event) {
@@ -69,47 +74,67 @@ export default function Search() {
           <div className="weather-app">
             <div className="row">
               <div className="col-6">
-                <h1 className="mt-3 mb-0 ">
+                <h1 className="WeatherMain">
                   <strong>
                     {cityName}, {country}
                   </strong>
                 </h1>
                 <div className="text-center">
-                  <h4>
-                    <FormattedDate date={date} />
-                  </h4>
-
                   <img
                     src={icon}
-                    width="35%"
+                    width="40%"
                     alt=""
-                    className="img-fluid rounded mt-0"
+                    className="img-fluid rounded mt-0 mb-5"
                   />
                 </div>
               </div>
               <div className="col-6">
-                <ul className="App-list mt-4">
-                  <li className="App-list-header"></li>
+                <ul className="App-list mt-5">
                   <li>
-                    Description:<strong> {description}</strong>
+                    <strong> {description}</strong>
                   </li>
-                  <li>Temperature: {temperature}</li>
+                  <li>
+                    Temperature:<strong> {temperature}</strong>
+                  </li>
+                  <li>
+                    Pressure:<strong> {pressure} hPa</strong>
+                  </li>
                   <li>
                     Humidity:<strong> {humidity}%</strong>
                   </li>
                   <li>
-                    Wind speed:<strong> {wind}km/h</strong>
+                    Wind:<strong> {wind} km/h</strong>
                   </li>
-                  <li></li>
                 </ul>
               </div>
-              <span className="App-footer">
-                <a href="https://github.com/szyszka212/weather-react">
-                  Open-sourced code{" "}
-                </a>
-                by Pati_
-              </span>
             </div>
+            <div className="row">
+              <div className="col-2">
+                <WeatherForecast icon={icon} />
+              </div>
+              <div className="col-2">
+                <WeatherForecast icon={icon} />
+              </div>
+              <div className="col-2">
+                <WeatherForecast icon={icon} />
+              </div>{" "}
+              <div className="col-2">
+                <WeatherForecast icon={icon} />
+              </div>{" "}
+              <div className="col-2">
+                <WeatherForecast icon={icon} />
+              </div>{" "}
+              <div className="col-2">
+                <WeatherForecast icon={icon} />
+              </div>
+            </div>
+            <span className="App-footer">
+              <a href="https://github.com/szyszka212/weather-react">
+                Open-sourced code{" "}
+              </a>
+              by Patrycja Szoła
+            </span>
+            <FormattedDate date={date} />{" "}
           </div>
         </div>
       </div>
@@ -122,7 +147,7 @@ export default function Search() {
           <a href="https://github.com/szyszka212/weather-react">
             Open-sourced code{" "}
           </a>
-          by <strong>Pati_</strong>
+          by <strong>Patrycja Szoła</strong>
         </span>
       </div>
     );

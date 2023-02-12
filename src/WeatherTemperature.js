@@ -14,10 +14,10 @@ export default function WeatherTemperature(props) {
     return (
       <span className="WeatherTemperature">
         <span className="TemperatureConverter">
-          <strong> {Math.round(props.celcius)}</strong>°C |{" "}
-          <a href="/" onClick={convertToFahrenheit}>
+          <strong> {Math.round(props.celcius)}</strong>°C{" "}
+          <a href="/" onClick={convertToFahrenheit} className="App-link">
             {" "}
-            <small>°F</small>{" "}
+            <small>(°F)</small>{" "}
           </a>
         </span>
       </span>
@@ -27,10 +27,10 @@ export default function WeatherTemperature(props) {
       <span className="WeatherTemperature">
         <span className="TemperatureConverter">
           <strong>{Math.round((props.celcius * 9) / 5 + 32)}</strong>
-          <a href="/" onClick={convertToCelcius}>
-            <small> °C</small>{" "}
-          </a>{" "}
-          | °F{" "}
+          °F{" "}
+          <a href="/" onClick={convertToCelcius} className="App-link">
+            <small>(°C)</small>{" "}
+          </a>
         </span>
       </span>
     );
