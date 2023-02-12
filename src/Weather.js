@@ -15,6 +15,7 @@ export default function Search() {
   let [wind, setWind] = useState("");
   let [icon, setIcon] = useState("");
   let [cityName, setCityName] = useState("");
+  let [coordinates, setCoordinates] = useState("");
   let [date, setDate] = useState("");
   let [loaded, setLoaded] = useState(false);
 
@@ -35,6 +36,7 @@ export default function Search() {
       `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
     );
     setDate(new Date(response.data.time * 1000));
+    setCoordinates(response.data.coordinates);
   }
 
   function handleSubmit(event) {
@@ -111,19 +113,7 @@ export default function Search() {
 
               <div className="col-6">
                 <div className="row mt-5">
-                  <WeatherForecast icon={icon} />
-                </div>
-                <div className="row">
-                  <WeatherForecast icon={icon} />
-                </div>
-                <div className="row">
-                  <WeatherForecast icon={icon} />
-                </div>
-                <div className="row">
-                  <WeatherForecast icon={icon} />
-                </div>
-                <div className="row">
-                  <WeatherForecast icon={icon} />
+                  <WeatherForecast icon={icon} coordinates={coordinates} />
                 </div>
               </div>
             </div>
