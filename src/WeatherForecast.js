@@ -3,22 +3,12 @@ import "./WeatherForecast.css";
 
 export default function WeatherForecast(props) {
   return (
-    <div className="WeatherForecast">
-      <div className="row">
-        <div className="col">
-          <div className="WeatherForecast-day">Thu</div>
-          <div className="WeatherForecast-icon">
-            <img
-              src={props.icon}
-              width="60%"
-              alt=""
-              className="img-fluid rounded mt-0"
-            />
-          </div>
-          <div className="WeatherForecast-temperature">
-            <span className="WeatherForecast-temperature-max">19°</span>
-            <span className="WeatherForecast-temperature-min">10°</span>
-          </div>
+    <div className="WeatherForecast ">
+      <div className="row d-flex justify-content-center mt-3 mb-1">
+        <div className="col-4">Thu</div>
+        <div className="col-4">Icon</div>
+        <div className="col-4">
+          19° / <span className="tempMin">10°</span>
         </div>
       </div>
     </div>

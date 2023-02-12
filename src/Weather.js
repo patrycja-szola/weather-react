@@ -39,7 +39,7 @@ export default function Search() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setCityName(city.charAt(0).toUpperCase() + city.slice(1).toLowerCase()); //we wprowadzonym tekście pierwsza litera będzie duża, a reszta liter będzie mała
+    setCityName(city.toUpperCase());
     let url = `https://api.shecodes.io/weather/v1/current?query=${city}&key=ea5bo889dfa0b4td5adbc7d7388af13a&units=metric`;
     axios.get(url).then(showTemperature);
   }
@@ -76,65 +76,69 @@ export default function Search() {
               <div className="col-6">
                 <h1 className="WeatherMain">
                   <strong>
-                    {cityName}, {country}
+                    {cityName}
+                    <br /> {country}
                   </strong>
                 </h1>
                 <div className="text-center">
                   <img
                     src={icon}
-                    width="40%"
+                    width="50%"
                     alt=""
-                    className="img-fluid rounded mt-0 mb-5"
+                    className="img-fluid rounded mt-0 mb-0"
                   />
+                  <span className="TemperatureDisplay">
+                    <strong> {temperature}</strong>
+                  </span>
+                </div>
+                <div>
+                  <ul className="App-list text-center mt-1">
+                    <li>
+                      <strong> {description}</strong>
+                    </li>
+                    <li>
+                      Pressure:<strong> {pressure} hPa</strong>
+                    </li>
+                    <li>
+                      Humidity:<strong> {humidity}%</strong>
+                    </li>
+                    <li>
+                      Wind:<strong> {wind} km/h</strong>
+                    </li>
+                  </ul>
                 </div>
               </div>
+
               <div className="col-6">
-                <ul className="App-list mt-5">
-                  <li>
-                    <strong> {description}</strong>
-                  </li>
-                  <li>
-                    Temperature:<strong> {temperature}</strong>
-                  </li>
-                  <li>
-                    Pressure:<strong> {pressure} hPa</strong>
-                  </li>
-                  <li>
-                    Humidity:<strong> {humidity}%</strong>
-                  </li>
-                  <li>
-                    Wind:<strong> {wind} km/h</strong>
-                  </li>
-                </ul>
+                <div className="row mt-5">
+                  <WeatherForecast icon={icon} />
+                </div>
+                <div className="row">
+                  <WeatherForecast icon={icon} />
+                </div>
+                <div className="row">
+                  <WeatherForecast icon={icon} />
+                </div>
+                <div className="row">
+                  <WeatherForecast icon={icon} />
+                </div>
+                <div className="row">
+                  <WeatherForecast icon={icon} />
+                </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-2">
-                <WeatherForecast icon={icon} />
-              </div>
-              <div className="col-2">
-                <WeatherForecast icon={icon} />
-              </div>
-              <div className="col-2">
-                <WeatherForecast icon={icon} />
-              </div>{" "}
-              <div className="col-2">
-                <WeatherForecast icon={icon} />
-              </div>{" "}
-              <div className="col-2">
-                <WeatherForecast icon={icon} />
-              </div>{" "}
-              <div className="col-2">
-                <WeatherForecast icon={icon} />
+            <div className="row d-flex justify-content-center">
+              <span className="App-footer">
+                <a href="https://github.com/szyszka212/weather-react">
+                  Open-sourced code{" "}
+                </a>
+                by Patrycja Szoła
+              </span>
+
+              <div>
+                <FormattedDate date={date} />
               </div>
             </div>
-            <span className="App-footer">
-              <a href="https://github.com/szyszka212/weather-react">
-                Open-sourced code{" "}
-              </a>
-              by Patrycja Szoła
-            </span>
-            <FormattedDate date={date} />{" "}
           </div>
         </div>
       </div>

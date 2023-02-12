@@ -5,19 +5,20 @@
 }
 
 .WeatherForecast {
-  border: 0px solid;
+  border: 0px solid var(--second-color);
   border-radius: 20px;
   color: var(--third-color);
   /* background: var(--second-color);*/
   opacity: 0.8;
-  margin-bottom: 15px;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  font-size: 20px;
 }
 
-.WeatherForecast-temperature {
-  margin-bottom: 5px;
-}
-
-.WeatherForecast-temperature-min {
+.tempMin {
   opacity: 0.6;
-  margin-left: 5px;
+  text-align: justify;
+  padding: 0px;
+  margin: 0px;
 }
