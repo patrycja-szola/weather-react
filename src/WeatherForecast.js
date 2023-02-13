@@ -1,25 +1,33 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./WeatherForecast.css";
 import WeatherForecastDay from "./WeatherForecastDay";
 
 export default function WeatherForecast(props) {
   let [loaded, setLoaded] = useState(false);
   let [forecast, setForecast] = useState("");
-  let [icon, setIcon] = useState("");
 
   function handleResponse(response) {
     setForecast(response.data.daily);
-    setIcon(
-      `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${forecast[0].condition.icon}.png`
-    );
     setLoaded(true);
   }
+
+  // set 'loaded' to false, if the coordinates change
+
+  useEffect(() => {
+    setLoaded(false);
+  }, [props.coordinates]);
 
   if (loaded) {
     return (
       <div className="WeatherForecast ">
-        <WeatherForecastDay data={forecast[0]} icon={icon} />
+        {forecast.map(function (dailyForecast, index) {
+          return (
+            <span key={index}>
+              <WeatherForecastDay data={dailyForecast} />
+            </span>
+          );
+        })}
       </div>
     );
   } else {

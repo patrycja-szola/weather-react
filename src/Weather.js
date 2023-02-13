@@ -4,6 +4,9 @@ import "bootstrap/dist/css/bootstrap.css";
 import WeatherTemperature from "./WeatherTemperature";
 import WeatherForecast from "./WeatherForecast";
 import FormattedDate from "./FormattedDate";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDroplet } from "@fortawesome/free-solid-svg-icons";
+import { faWind } from "@fortawesome/free-solid-svg-icons";
 
 export default function Search() {
   let [city, setCity] = useState("");
@@ -75,13 +78,13 @@ export default function Search() {
         <div className="main-border">
           <div className="weather-app">
             <div className="row">
+              <h1 className="WeatherMain">
+                <strong>
+                  {cityName}
+                  <br /> {country}
+                </strong>
+              </h1>
               <div className="col-6">
-                <h1 className="WeatherMain">
-                  <strong>
-                    {cityName}
-                    <br /> {country}
-                  </strong>
-                </h1>
                 <div className="text-center">
                   <img
                     src={icon}
@@ -94,7 +97,7 @@ export default function Search() {
                   </span>
                 </div>
                 <div>
-                  <ul className="App-list text-center mt-1">
+                  <ul className="App-list text-center mt-1 mb-0">
                     <li>
                       <strong> {description}</strong>
                     </li>
@@ -102,10 +105,12 @@ export default function Search() {
                       Pressure:<strong> {pressure} hPa</strong>
                     </li>
                     <li>
-                      Humidity:<strong> {humidity}%</strong>
+                      <FontAwesomeIcon icon={faWind} />
+                      <strong> {wind} km/h</strong>
                     </li>
                     <li>
-                      Wind:<strong> {wind} km/h</strong>
+                      <FontAwesomeIcon icon={faDroplet} />
+                      <strong> {humidity}%</strong>
                     </li>
                   </ul>
                 </div>
@@ -118,7 +123,7 @@ export default function Search() {
               </div>
             </div>
             <div className="row d-flex justify-content-center">
-              <span className="App-footer">
+              <span className="App-footer mt-3">
                 <a href="https://github.com/szyszka212/weather-react">
                   Open-sourced code{" "}
                 </a>
